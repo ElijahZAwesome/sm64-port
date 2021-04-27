@@ -260,7 +260,7 @@ endif
 
 else
 ifeq ($(TARGET_WEB),1)
-  OPT_FLAGS := -O3 -g4 --source-map-base http://localhost:8080/
+  OPT_FLAGS := -O2 -g4 --source-map-base http://localhost:8080/
 else
   OPT_FLAGS := -O2
 endif
