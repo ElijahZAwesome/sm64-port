@@ -260,7 +260,7 @@ endif
 
 else
 ifeq ($(TARGET_WEB),1)
-  OPT_FLAGS := -O2 -g4 --source-map-base http://localhost:8080/
+  OPT_FLAGS := -O3 -g4 --source-map-base http://localhost:8080/
 else
   OPT_FLAGS := -O2
 endif
@@ -425,6 +425,7 @@ ifneq ($(TARGET_WEB),1)
   CXX := g++
 else
   CC := emcc
+  CXX := em++
 endif
 ifeq ($(CXX_FILES),"")
   LD := $(CC)
@@ -447,7 +448,7 @@ ifeq ($(TARGET_LINUX),1)
 endif
 ifeq ($(TARGET_WEB),1)
   PLATFORM_CFLAGS  := -DTARGET_WEB
-  PLATFORM_LDFLAGS := -lm -no-pie -s TOTAL_MEMORY=20MB -g4 --source-map-base http://localhost:8080/ -s "EXTRA_EXPORTED_RUNTIME_METHODS=['callMain']"
+  PLATFORM_LDFLAGS := -lm -no-pie -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_MEMORY=20MB -g4 --source-map-base http://localhost:8080/ -s "EXTRA_EXPORTED_RUNTIME_METHODS=['callMain']"
 endif
 
 PLATFORM_CFLAGS += -DNO_SEGMENTED_MEMORY -DUSE_SYSTEM_MALLOC
